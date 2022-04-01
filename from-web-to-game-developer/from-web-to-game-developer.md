@@ -6,4 +6,4 @@ marp: true
 
 **Learn Unity through best practices**
 
-Giorgio Pomettini
+Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
