@@ -7,7 +7,7 @@ theme: haskell
 
 **Learn Unity through best practices**
 
-Alternative title: how do I use Unity by skipping the boring stuff?
+Alternative title: how do I learn Unity by skipping the boring stuff?
 
 Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
@@ -43,9 +43,18 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 ---
 
+# But first, what is is a GameObject?
+
+- Every object in your game is a **GameObject**
+- **GameObjects** acts as containers for **Components**
+- To give a **GameObject** the properties it needs to become a **Light** or a **Camera**, you need to add components to it
+- Unity has lots of different built-in component types, and you can also make your own components, and we'll see how
+
+---
+
 # Unity’s interface
 
-# ![](images/Editor-Breakdown.png)
+# ![height:500px](images/Editor-Breakdown.png)
 
 ---
 
@@ -70,7 +79,7 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 # C: The Scene view
 
-# ![](images/scene-view.png)
+# ![height:500px](images/scene-view.png)
 
 ---
 
@@ -84,9 +93,35 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 # D: The Game view
 
+# ![height:500px](images/game-view-window.png)
+
+---
+
+# D: The Game view
+
+- The Game view is rendered from the **Camera(s)** in your application
+- You need to use one or more **Cameras** to control what the player sees when they are using your application
+- The default scene does provide a **Camera** and a **Directional Light**
+
 ---
 
 # E: The Inspector window
+
+# ![height:500px](images/InspectorWindowCallout.jpg)
+
+---
+
+# E: The Inspector window
+
+- Use the **Inspector** window to view and edit properties and settings for almost everything in the Unity Editor, including **GameObjects**, Unity components, Assets, Materials, and in-editor settings and preferences
+- What you can see and edit in an **Inspector** window depends on what you select
+- This section describes what an **Inspector** window displays for different types of items you can select.
+
+---
+
+# E: The Inspector window
+
+# ![height:500px](images/MultiobjectEdit.png)
 
 ---
 
@@ -95,13 +130,12 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 # ![](images/project-window-wide-layout.png)
 
 - The Project window displays all of the files related to your Project and is the main way you can navigate and find Assets and other Project files in your application
-- When you start a new Project by default this window is open. However, if you cannot find it, or it is closed, you can open it via **Window > General > Project**
 
 ---
 
 # Console Window
 
-# ![](images/Console.png)
+# ![height:250px](images/Console.png)
 
 - The Console Window displays errors, warnings, and other messages the Editor generates
 - These errors and warnings help you find issues in your project, such as script compilation errors
@@ -109,20 +143,23 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 ---
 
-# Wait, what is is a GameObject?
+# Let's create our first GameObject
 
-- Every object in your game is a **GameObject**
-- **GameObjects** acts as containers for **Components** which implement the functionality
-- To give a **GameObject** the properties it needs to become a light, or a tree, or a camera, you need to add components to it. Depending on what kind of object you want to create, you add different combinations of components to a **GameObject**
-- Unity has lots of different built-in component types, and you can also make your own components
+- To create a new **GameObject** in the **Hierarchy** window:
+  - Right-click on empty space
+  - Select **Create Empty**
+  - Give the **GameObject** the name you want (I called mine Car)
+
+# ![](images/no-default-parent.png)
 
 ---
 
-# Light example
+# Let's assign a component to our GameObject
 
-- For example, a Light object is created by attaching a **Light** component to a **GameObject**
+- To assign a component to our **GameObject**, click **Add Component** on the **Inspector** and select the component that you want to assign
+- For example, a Light object is created by attaching a **Light** component
 
-# ![](images/GameObjectLightExample1.png)
+# ![height:350px](images/GameObjectLightExample1.png)
 
 ---
 
@@ -174,6 +211,7 @@ public class MyScript : MonoBehaviour
 - **MonoBehaviour** is the base class from which every Unity script derives
 - When you create a C# script from Unity’s project window, it automatically inherits from **MonoBehaviour**, and provides you with a template script
 - Initialization of an object is not done using a constructor function. This is because the construction of objects is handled by the editor
+- Classes that inherits from **MonoBehaviours** has some methods (eg. **Start**, **Update**) that will be called by the editor automatically via reflection
 
 ---
 
@@ -204,14 +242,44 @@ public class MyScript : MonoBehaviour
 
 ---
 
+# Common mistakes
+
+---
+
 # Common mistake #1: Forget Inheritance
 
 - Always prefer composition over inheritance
 - Example: you're making a game that has a lot of swords, it would be reasonable to make a **WeaponBase** class that other weapons can inherit from
 - The **WeaponBase** can contain a generic method like **DoDamage** that can be overridden by sub-classes
+
+```csharp
+public class WeaponBase : MonoBehaviour
+{
+    public virtual void DoDamage()
+    {
+        // Do damage
+    }
+}
+```
+
+---
+
 - Depending of what your weapons should do (eg. fire damage, poison damage) at some point you will have lot of duplicate code for each weapon
 - Why not making a **FireDamage** or a **PoisonDamage** component and reference it to your weapon instead?
-- You can use a Strategy-pattern like way to abstract behaviours by using interfaces or **ScriptableObjects** (I'll talk about that in the next slides)
+
+```csharp
+public class FireWeapon : MonoBehaviour
+{
+    public FireDamage DamageComponent;
+
+    public void DoDamage()
+    {
+        DamageComponent.Calculate();
+    }
+}
+```
+
+- You can use a Strategy-pattern like way to abstract behaviours by using **Interfaces** or **ScriptableObjects** (I'll talk about that in the next slides)
 
 ---
 
@@ -265,13 +333,59 @@ void SpawnEnemy()
 
 # Common mistake #5: Play mode doesn't save?
 
+- In Play mode, any changes you make are temporary, and are reset when you exit Play mode
+- The Editor UI darkens to remind you of this
+
+---
+
+# Best practices
+
 ---
 
 # Best practice #1: Cache stuff on Start
 
+- Contrary to what happens with web development, ever frame of the game needs to be rendered in 16ms in order to achieve 60 frames per seconds
+- Therefore
+
 ---
 
 # Best practice #2: Learn about Interfaces
+
+- **Interfaces** contains definitions of methods or variables that the class which uses it must implement, basically ensuring that any class that uses a certain interface has all its methods implemented
+- **Interfaces** have no implementation. They are a contract/template that an implementing class must match
+
+```csharp
+public Interface IPickable
+{
+    void Pick()
+}
+```
+
+---
+
+# Best practice #2: Learn about Interfaces
+
+- Although an object can only inherit from one class, it can implement infinite number of **Interfaces**
+- To implement an **Interface** in a C# script, add interface name after the **MonoBehaviour**
+
+```csharp
+public class Book : MonoBehaviour, IPickable
+
+{
+    public void Pick()
+    {
+        // Do something when object is picked
+    }
+}
+```
+
+---
+
+# Best practice #2: Learn about Interfaces
+
+- In Unity it is possible to get interface references calling **GetComponent<T>()**
+- For the example above you would call `GetComponents<IPickable>()` and that will return all references to implementations of the interface on your **GameObject**
+- You can use the same technique to check if a **GameObject** has a script that matches that interface (eg. the player can only pick objects that has the **IPickable** interface)
 
 ---
 
@@ -280,6 +394,11 @@ void SpawnEnemy()
 ---
 
 # Best practice #4: ScriptableObjects
+
+- **ScriptableObjects** are data containers that can be saved as assets in the projec
+- They cannot be attached to a **GameObject** in a **Scene** (but you can reference them in your **Scripts**)
+- Most often, they are used as assets which are only meant to store data, but you can use them as a way to pass data between **Scripts**
+- If you want to know how, watch the [Game Architecture with Scriptable Objects](https://www.youtube.com/watch?v=raQ3iHhE_Kk) talk by Ryan Hipple
 
 ---
 
