@@ -43,12 +43,14 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 ---
 
-# But first, what is is a GameObject?
+# Let's start with GameObjects
+
+# ![height:200px](images/1_Xr0xVLiHzv9nj4cYaprmzg.png)
 
 - Every object in your game is a **GameObject**
 - **GameObjects** acts as containers for **Components**
 - To give a **GameObject** the properties it needs to become a **Light** or a **Camera**, you need to add components to it
-- Unity has lots of different built-in component types, and you can also make your own components, and we'll see how
+- Unity has lots of different built-in component types, and you can also make your own components, and we'll see how in the next slides
 
 ---
 
@@ -86,6 +88,7 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 # C: The Scene view
 
 - The **Scene** view is your interactive view into the world you are creating
+- **Scenes** are where you work with content in Unity, they are assets that contain all or part of a game or application
 - You can use the **Scene** view to select and position scenery, characters, Cameras, lights, and all other types of **GameObjects**
 - Selecting, manipulating, and modifying **GameObjects** in the **Scene** view are some of the first skills you must learn to begin working in Unity
 
@@ -170,7 +173,9 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 - It's somewhat similar to Java or C++ (minus the memory managment)
 - Let's create our first script by going to **Assets > Create > C# Script**
 
-# ![](images/NewScriptIcon.png)
+# ![height:200px](images/NewScriptIcon.png)
+
+- The name of the file (and the Class) will be the name of your Component
 
 ---
 
@@ -210,7 +215,8 @@ public class MyScript : MonoBehaviour
 
 - **MonoBehaviour** is the base class from which every Unity script derives
 - When you create a C# script from Unity’s project window, it automatically inherits from **MonoBehaviour**, and provides you with a template script
-- Initialization of an object is not done using a constructor function. This is because the construction of objects is handled by the editor
+- Initialization of an object is not done using a constructor function
+- The construction of objects is handled by the editor
 - Classes that inherits from **MonoBehaviours** has some methods (eg. **Start**, **Update**) that will be called by the editor automatically via reflection
 
 ---
@@ -218,7 +224,9 @@ public class MyScript : MonoBehaviour
 # Variables and the Inspector
 
 - When creating a script, you are essentially creating your own new type of component that can be attached to **GameObjects** just like any other component
-- Just like other Components often have properties that are editable in the inspector, you can allow values in your script to be edited from the Inspector too
+- Just like other Components often have properties that are editable in the inspector, you can allow values in your script to be edited from the **Inspector** too
+- In C#, the simplest way to see a variable in the **Inspector** is to declare it as public
+- You can use the `SerializeField` attribute to serialize (which is another way to say that Unity is storing that value) a private variable and show it in the **Inspector**
 
 ---
 
@@ -239,6 +247,20 @@ public class MyScript : MonoBehaviour
     }
 }
 ```
+
+This code creates an editable field in the **Inspector** labelled “My Name”
+
+---
+
+# Variables and the Inspector
+
+You can attach a script by dragging the script asset to a **GameObject** in the **Hierarchy** panel or to the **Inspector** of the **GameObject** that is currently selected
+
+# ![](images/EditingVarInspector.png)
+
+- If you edit the name and then press **Play**, you will see that the message includes the text you entered.
+
+# ![](images/DebugLogMessage.png)
 
 ---
 
@@ -333,19 +355,54 @@ void SpawnEnemy()
 
 # Common mistake #5: Play mode doesn't save?
 
-- In Play mode, any changes you make are temporary, and are reset when you exit Play mode
+- In **Play mode**, any changes you make are temporary, and are reset when you exit **Play mode**
 - The Editor UI darkens to remind you of this
+- You can change the **Play mode** tint to a different color to avoid confusion by going to **Unity > Preferences** (On Mac) or **Edit > Preferences** (On Windows)
+
+# ![height:280px](images/1_92vYYxiSpadvPxLNmWOoRw.png)
 
 ---
 
-# Best practices
+# Common mistake #5: Play mode doesn't save?
+
+# ![height:500px](images/1_ULxVpCzJunAwGBfVMZaTHw.png)
 
 ---
 
 # Best practice #1: Cache stuff on Start
 
-- Contrary to what happens with web development, ever frame of the game needs to be rendered in 16ms in order to achieve 60 frames per seconds
-- Therefore
+- Avoid putting expensive operations in the **Update** method, as they will be executed every frame (~16ms) and in the long run they may cause performance issues
+- For instance, in Unity if you want to get a reference another component in your **GameObject**, you can use the method `GetComponent<MyComponentType>`
+
+```csharp
+void Update()
+{
+    GetComponent<PlayerHealth>().Health += 0.1f;
+}
+```
+
+- It is advised to store that reference in a local variable instead of calling `GetComponent` every frame, for performance and maintenability reasons
+
+---
+
+# Best practice #1: Cache stuff on Start
+
+```csharp
+public class Player : MonoBehaviour
+{
+    public PlayerHealth Health;
+
+    void Start()
+    {
+        Health = GetComponent<PlayerHealth>();
+    }
+
+    void Update()
+    {
+        GetComponent<PlayerHealth>().Health += 0.1f;
+    }
+}
+```
 
 ---
 
@@ -391,6 +448,37 @@ public class Book : MonoBehaviour, IPickable
 
 # Best practice #3: Learn about Coroutines
 
+- A **Coroutine** is a special type of function used in Unity to stop the execution sometime or certain condition is met, and continue from where it had left off
+- **Coroutines** can be used for two reasons: asynchronous code and code that needs to compute over several frames
+- You may think that **Coroutines** are similar to **Async/Await**, but they are not because they're running on the same thread
+- There is **Async/Await** on C#, but most of the Unity APIs will use **Coroutines**, so you better learn how to use them
+- I'll show you an example on how to make a Get request with **Coroutines**
+
+---
+
+# Best practice #3: Learn about Coroutines
+
+```csharp
+public class ExampleGetRequest : MonoBehaviour
+{
+    void Start()
+    {
+        StartCoroutine(GetText());
+    }
+
+    IEnumerator GetText()
+    {
+        UnityWebRequest www = UnityWebRequest.Get("http://www.my-server.com");
+        yield return www.Send();
+
+        if(!www.isError)
+        {
+            Debug.Log(www.downloadHandler.text);
+        }
+    }
+}
+```
+
 ---
 
 # Best practice #4: ScriptableObjects
@@ -403,6 +491,11 @@ public class Book : MonoBehaviour, IPickable
 ---
 
 # Best practice #5: Custom editors with Odin
+
+- You use [**Odin Inspector**](https://odininspector.com/) to rapidly create custom Editor Windows to help organize your project and game data
+- You can also use Odin to serialize (show in inspector) values that would not be serialized by Unity, such as **Properties** or **Dictionaries** (HashMaps)
+
+# ![height:300px](images/odinserializer_dictionary.png)
 
 ---
 
