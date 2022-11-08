@@ -17,7 +17,7 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 - Been using Unity since 2013
 - Worked on several companies and startups as a Unity dev
-- Lead developer on [Fury Roads Survivor](http://www.furyroadssurvivor.com/) (6M+] downloads)
+- Lead developer on [Fury Roads Survivor](http://www.furyroadssurvivor.com/) (6M+ downloads)
 - Programmer on [Blankos Block Party](https://blankos.com/) (shown at E3 2020)
 - Now working as a freelancer and teacher
 
