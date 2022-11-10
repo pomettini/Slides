@@ -5,7 +5,7 @@ theme: haskell
 
 # Let's make a game for Playdate
 
-**Also called the Game Boy with a Crank**
+**Also called "the Game Boy with a Crank"**
 
 Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
@@ -24,21 +24,40 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 # Brief history
 
+- Announced on May 2019
+- Started shipping on April 2022
+- $179 (with taxes & shipping = ~€280)
+
 ---
 
 # Tech specs
+
+-
 
 ---
 
 # Dev environments
 
+- [Visual Studio Code](https://code.visualstudio.com/) on Windows, Mac and Linux
+- [Nova](https://nova.app/) on Mac (recommended)
+- Playdate Simulator
+- A Playdate (if you have one)
+
 ---
 
 # Visual Studio Code setup
 
+- Download the [Playdate extension](https://marketplace.visualstudio.com/items?itemName=Orta.playdate) for Visual Studio Code
+
 ---
 
 # Nova setup
+
+---
+
+# Playdate Simulator
+
+Download the [Playdate SDK](https://play.date/dev/)
 
 ---
 
@@ -64,7 +83,7 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 # Meh things
 
-* Arrays starts at 1
+- One-based indexing (arrays starts at 1)
 
 ---
 
@@ -92,15 +111,15 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 ---
 
-# Instancing
-
----
-
-# Destruction
+# Instancing & Destroying
 
 ---
 
 # Documentation
+
+---
+
+# Where to put your game
 
 ---
 
