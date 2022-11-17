@@ -1,13 +1,21 @@
 ---
 marp: true
-theme: haskell
+theme: default
+paginate: true
+style: |
+  img[alt~="center"] {
+    display: block;
+    margin: 0 auto;
+  }
 ---
 
-# Let's make a game for Playdate
+# Let's make a game for the Playdate
 
-**Also called "the Game Boy with a Crank"**
+**Also called "the Game Boy redesigned for the age of Netflix"**
 
 Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
+
+![bg right](images/Playdate-photo.png)
 
 ---
 
@@ -18,18 +26,21 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 - Making a player moving on the screen
 - How to use the Crank (duh)
 - Where to look for help
-- Profit (?)
+- Profit *(yes really!)*
+
+![bg right](images/Playdate-photo-3.jpeg)
 
 ---
 
 # Brief history
 
-- Created by [Panic](https://panic.com/), a software house notable for [Coda](https://panic.com/coda/) and [Transmit](https://panic.com/transmit/), and for publishing [Firewatch](https://www.firewatchgame.com/) and [Untitled Goose Game](https://goose.game/), as a way to celebrate their 20th birthday
+- Created by [Panic](https://panic.com/), a software house notable MacOS developer tools as a way to celebrate their 20th birthday
 - Announced on May 2019
 - Started shipping on April 2022
-- $179 (with taxes & shipping = ~€280)
+- $179 (w/ taxes & shipping: €280)
 - Comes with [24 exclusive games](https://play.date/games/)
-- Any Playdate is a devkit and you can develop/sideload games on it!
+
+![bg right](images/Playdate-photo-4.jpeg)
 
 ---
 
@@ -56,7 +67,7 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 - [Pulp](https://play.date/pulp/) on your browser
 - [Playdate SDK](https://play.date/dev/) which supports Lua or C
 - [Visual Studio Code](https://code.visualstudio.com/) on Windows, Mac and Linux
-- [Nova](https://nova.app/) on Mac (recommended)
+- [Nova](https://nova.app/) on Mac (recommended but $$$)
 - Playdate Simulator (included in the SDK)
 - A Playdate (if you have one)
 
@@ -71,12 +82,16 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 ---
 
+# ![height:600px center](images/pulp.png)
+
+---
+
 # Playdate Simulator
 
 - Download the [Playdate SDK](https://play.date/dev/)
 - Launch the Playdate Simulator
 
-# ![height:350px](images/playdate-simulator.png)
+# ![height:350px center](images/playdate-simulator.png)
 
 ---
 
@@ -85,7 +100,7 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 - Make sure you have Visual Studio Code installed
 - Download the [Playdate extension](https://marketplace.visualstudio.com/items?itemName=Orta.playdate)
 - Fork the Visual Studio Code template for [Windows](https://github.com/Whitebrim/VSCode-PlaydateTemplate) or for [MacOS](https://github.com/cadin/playdate-vscode-template)
-- Ctrl/Cmd + Shift + P → Run app in Playdate Simnulator
+- Ctrl/Cmd + Shift + P → **Run app in Playdate Simulator**
 
 ---
 
@@ -101,24 +116,26 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 ---
 
+# ![height:600px center](images/nova.png)
+
+---
+
 # Hello world!
 
 ```lua
 print("Hello world!")
 ```
 
-# ![height:350px](images/hello-world.png)
+# ![height:400px center](images/hello-world.png)
 
 ---
 
 # Brief intro to Lua
 
----
-
-# Primitives
-
 - Lua is a dynamically typed language
 - There are no type definitions in the language, each value carries its own type
+
+#### Primitives
 
 ```lua
 "Hello world"   -- string
@@ -181,9 +198,9 @@ print(a[20])        -- Prints nil (undefined)
 
 # Loops
 
-- A numeric for has the following syntax
-
 ```lua
+-- A numeric for has the following syntax
+
 for i = 1, 5 do
     print(i)
 end
@@ -197,11 +214,13 @@ end
 -- 5
 ```
 
+**Watch out:** In Lua, indices starts at 1 _(ugh!)_
+
 ---
 
 # Loops
 
-- The basic Lua library provides `pairs` a handy function that allows you to iterate over the elements of a table
+- The basic Lua library provides **pairs** a handy function that allows you to iterate over the elements of a table
 
 ```lua
 a = {}
@@ -209,26 +228,57 @@ a[10] = "Hello"
 a["x"] = "World"
 
 for key, value in pairs(a) do
-    print(key .. value)  -- Concats strings with ..
+    print(key .. " - " .. value)  -- Concats strings with ..
 end
 
 -- Output:
 
--- 10Hello
--- xWorld
+-- 10 - Hello
+-- x - World
 ```
 
 ---
 
 # Conditionals
 
-- TODO
+```lua
+-- If statements are not so different from other languages
+
+if a < 0 then a = 0 end
+
+-- If else statement
+
+if a < b then
+    return a
+else
+    return b
+end
+
+-- But I personally prefer the inlined style
+
+if a < b then return a else return b end
+```
 
 ---
 
-# Meh things
+# Scoping
 
-- One-based indexing (arrays starts at 1)
+In Lua, every variable is global by default (use local to avoid conflicts, overriding and _bugs_)
+
+```lua
+a = 0           -- Global scope
+local b = 0     -- Local scope
+
+do              -- New scope (can be a function, a loop, etc)
+    a = 5
+    b = 5
+    local c = 5
+end
+
+print(a)        -- Prints 5
+print(b)        -- Prints 0
+print(c)        -- Prints nil
+```
 
 ---
 
@@ -240,7 +290,7 @@ end
 import "CoreLibs/graphics"
 import "CoreLibs/sprites"
 
-gfx = playdate.graphics
+gfx = playdate.graphics                     -- Shortcut to gfx library
 
 player = gfx.sprite:new()                   -- Creates a new sprite object
 player:setImage(gfx.image.new('player'))    -- 'player.png' is being loaded
@@ -254,13 +304,9 @@ end
 
 ---
 
-# Loading a Sprite
-
-# ![height:450px](images/hello-sprite.png)
+# ![height:600px center](images/hello-sprite.png)
 
 ---
-
-# Transforming a Sprite
 
 ```lua
 -- Make the player sprite five time bigger
@@ -268,11 +314,9 @@ end
 player:setScale(5)
 ```
 
-# ![height:300px](images/big-sprite.png)
+# ![height:400px center](images/big-sprite.png)
 
 ---
-
-# Transforming a Sprite
 
 ```lua
 -- Rotating a sprite (in degrees)
@@ -280,11 +324,9 @@ player:setScale(5)
 player:setRotation(135)
 ```
 
-# ![height:300px](images/rotated-sprite.png)
+# ![height:400px center](images/rotated-sprite.png)
 
 ---
-
-# Transforming a Sprite
 
 ```lua
 -- Flipping a sprite (on the horizontal side)
@@ -292,7 +334,7 @@ player:setRotation(135)
 player:setImageFlip(gfx.kImageFlippedX)
 ```
 
-# ![height:300px](images/flipped-sprite.png)
+# ![height:400px center](images/flipped-sprite.png)
 
 ---
 
@@ -308,7 +350,7 @@ player:setZIndex(10)
 player:setVisible(false)
 ```
 
-- For more sprite-related methods have a look at their [Inside Playdate](https://sdk.play.date/Inside%20Playdate.html#_sprite_basics) section
+For more sprite-related methods have a look at their [Inside Playdate](https://sdk.play.date/Inside%20Playdate.html#_sprite_basics) section
 
 ---
 
@@ -336,8 +378,8 @@ end
 
 # Using the Crank
 
-- For `playdate.cranked()`, `change` is the angle change in degrees
-- `acceleratedChange` is change multiplied by a value that increases as the crank moves faster, similar to the way mouse acceleration works
+- For **playdate.cranked()**, **change** is the angle change in degrees
+- **acceleratedChange** is change multiplied by a value that increases as the crank moves faster, similar to the way mouse acceleration works
 
 ```lua
 -- Moves player horizontally based on how you turn the crank
@@ -349,9 +391,7 @@ end
 
 ---
 
-# Using the Crank
-
-# ![height:450px](images/playdate-simulator-full.png)
+# ![height:600px center](images/playdate-simulator-full.png)
 
 ---
 
@@ -380,12 +420,12 @@ class('Cat').extends(Animal)
 
 ```lua
 function Cat:init(age, weight)
-    Oak.super.init(self, age)
+    Cat.super.init(self, age)
     self.weight = height
 end
 ```
 
-- The init function will normally want to call its superclass’s implementation of **init** and must use the syntax above
+- The **init** function will normally want to call its superclass’s implementation of **init** and must use the syntax above
 
 ---
 
@@ -420,30 +460,32 @@ Looks better now, don't you think?
 ```lua
 import "CoreLibs/graphics"
 import "CoreLibs/sprites"
-import "player"
+import "player"             -- We need to import the player file
 
 gfx = playdate.graphics
 
 player = Player(200, 120)
 
 function playdate.update()
-  gfx.sprite.update()
+    gfx.sprite.update()
 end
 ```
 
 ---
 
-# OOP
-
 ```lua
 players = { Player(100, 120), Player(200, 120), Player(300, 120) }
 ```
 
-# ![height:400px](images/three-players.png)
+# ![height:450px center](images/three-players.png)
 
 ---
 
 # Documentation
+
+[Inside Playdate](https://sdk.play.date/) is the official documentation in one handy web page
+
+# ![height:400px center](images/inside-playdate.png)
 
 ---
 
@@ -453,17 +495,33 @@ players = { Player(100, 120), Player(200, 120), Player(300, 120) }
 - You can self-host it on your website or
 - Put it or sell it on websites such as [itch.io](https://itch.io/)
 
+# ![height:75px](images/itchio.png)
+
+*PS: Panic is offering funding for games, check the [Game Pitch Form](https://panic-inc.typeform.com/playdate-pitch?typeform-source=play.date) for more info*
+
+---
+
+# ![height:600px center](images/itchio-playdate.png)
+
 ---
 
 # Where to look for help
 
-- [SquidGodDev](https://www.youtube.com/c/SquidGodDev) excellent video tutorials
-- [Awesome Playdate](https://github.com/sayhiben/awesome-playdate) crowd-sourced awesomeness
+- [Playdate Developer Forum](https://devforum.play.date/)
+- [Playdate Squad](https://discord.com/invite/zFKagQ2) aka the most active Discord server
 - [/r/PlaydateConsole](https://www.reddit.com/r/PlaydateConsole/) and [/r/PlaydateDeveloper](https://www.reddit.com/r/PlaydateDeveloper/)
+
+#### And if you want to learn more
+
+- [SquidGodDev](https://www.youtube.com/c/SquidGodDev) for excellent video tutorials
+- [Awesome Playdate](https://github.com/sayhiben/awesome-playdate) crowd-sourced awesomeness
+- */PlaydateSDK/Example* folder
 
 ---
 
 # Demo
+
+[Source code](https://github.com/Pomettini/PlaydateGame003)
 
 ---
 
