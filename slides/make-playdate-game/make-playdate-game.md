@@ -1,4 +1,6 @@
 ---
+title: Let's make a game for the Playdate
+description: Also called "the Game Boy redesigned for the age of Netflix"
 marp: true
 theme: default
 paginate: true
@@ -26,7 +28,7 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 - Making a player moving on the screen
 - How to use the Crank (duh)
 - Where to look for help
-- Profit *(yes really!)*
+- Profit _(yes really!)_
 
 ![bg right](images/Playdate-photo-3.jpeg)
 
@@ -497,7 +499,7 @@ players = { Player(100, 120), Player(200, 120), Player(300, 120) }
 
 # ![height:75px](images/itchio.png)
 
-*PS: Panic is offering funding for games, check the [Game Pitch Form](https://panic-inc.typeform.com/playdate-pitch?typeform-source=play.date) for more info*
+_PS: Panic is offering funding for games, check the [Game Pitch Form](https://panic-inc.typeform.com/playdate-pitch?typeform-source=play.date) for more info_
 
 ---
 
@@ -515,7 +517,7 @@ players = { Player(100, 120), Player(200, 120), Player(300, 120) }
 
 - [SquidGodDev](https://www.youtube.com/c/SquidGodDev) for excellent video tutorials
 - [Awesome Playdate](https://github.com/sayhiben/awesome-playdate) crowd-sourced awesomeness
-- */PlaydateSDK/Example* folder
+- _/PlaydateSDK/Example_ folder
 
 ---
 
@@ -538,6 +540,8 @@ But you can find all your answers on [Inside Playdate](https://sdk.play.date/)
 
 ---
 
-# Thank you
+# Thank you!
 
-- Questions?
+Slides available at _https://github.com/Pomettini/Slides_
+
+**Questions?**
