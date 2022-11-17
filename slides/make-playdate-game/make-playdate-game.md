@@ -1,7 +1,6 @@
 ---
 marp: true
 theme: haskell
-class: lead
 ---
 
 # Let's make a game for Playdate
@@ -25,9 +24,12 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 # Brief history
 
+- Created by [Panic](https://panic.com/), a software house notable for [Coda](https://panic.com/coda/) and [Transmit](https://panic.com/transmit/), and for publishing [Firewatch](https://www.firewatchgame.com/) and [Untitled Goose Game](https://goose.game/), as a way to celebrate their 20th birthday
 - Announced on May 2019
 - Started shipping on April 2022
 - $179 (with taxes & shipping = ~€280)
+- Comes with [24 exclusive games](https://play.date/games/)
+- Any Playdate is a devkit and you can develop/sideload games on it!
 
 ---
 
@@ -45,12 +47,13 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 **Sound:** Internal speaker, microphone, headphone jack
 **Connectivity:** Wi-Fi, Bluetooth
-**Memory & Storage:** 16MB RAM, 4GB flash storage
+**Memory & Storage:** 16MB _(yes, megabytes!)_ RAM, 4GB flash storage
 
 ---
 
 # Dev environments
 
+- [Pulp](https://play.date/pulp/) on your browser
 - [Playdate SDK](https://play.date/dev/) which supports Lua or C
 - [Visual Studio Code](https://code.visualstudio.com/) on Windows, Mac and Linux
 - [Nova](https://nova.app/) on Mac (recommended)
@@ -59,10 +62,30 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 ---
 
+# Pulp
+
+- [Pulp](https://play.date/pulp) is an online game maker for Playdate (inspired by [Bitsy](https://bitsy.org/))
+- It’s an all-in-one game studio: it includes sprite, animation, music and a level editor
+- Uses [PulpScript](https://play.date/pulp/docs/pulpscript/), which is a friendly scripting language
+- However, since Pulp games are limited in scope, we'll use the [Playdate SDK](https://play.date/dev/) instead
+
+---
+
+# Playdate Simulator
+
+- Download the [Playdate SDK](https://play.date/dev/)
+- Launch the Playdate Simulator
+
+# ![height:350px](images/playdate-simulator.png)
+
+---
+
 # Visual Studio Code setup
 
 - Make sure you have Visual Studio Code installed
 - Download the [Playdate extension](https://marketplace.visualstudio.com/items?itemName=Orta.playdate)
+- Fork the Visual Studio Code template for [Windows](https://github.com/Whitebrim/VSCode-PlaydateTemplate) or for [MacOS](https://github.com/cadin/playdate-vscode-template)
+- Ctrl/Cmd + Shift + P → Run app in Playdate Simnulator
 
 ---
 
@@ -75,12 +98,6 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 - Choose **Playdate Simulator** from the list of options to create a new configuration
 - Specify our project’s _Source_ folder. It will use _./Source_ or _./source_ by default
 - Press the **Run** button in the upper left corner of the window to invoke the Playdate Simulator and run your game
-
----
-
-# Playdate Simulator
-
-Download the [Playdate SDK](https://play.date/dev/)
 
 ---
 
@@ -205,6 +222,8 @@ end
 
 # Conditionals
 
+- TODO
+
 ---
 
 # Meh things
@@ -289,8 +308,7 @@ player:setZIndex(10)
 player:setVisible(false)
 ```
 
-* For more sprite-related methods have a look at their [Inside Playdate](https://sdk.play.date/Inside%20Playdate.html#_sprite_basics) section
-
+- For more sprite-related methods have a look at their [Inside Playdate](https://sdk.play.date/Inside%20Playdate.html#_sprite_basics) section
 
 ---
 
@@ -337,15 +355,91 @@ end
 
 ---
 
-# Classes
+# OOP
+
+- Lua does not offer built-in support for object-oriented programming of any kind
+- CoreLibs provides a basic object-oriented class system
+- **Object** is the base class all new subclasses inherit from
+
+```lua
+-- Base class is Animal
+
+class('Animal').extends()
+
+-- Cat is a subclass of Animal
+
+class('Cat').extends(Animal)
+```
 
 ---
 
-# Creating a Class
+# OOP
+
+- Classes are provided with an **init** function
+- The subclass decides how many and what type of arguments its **init** function takes
+
+```lua
+function Cat:init(age, weight)
+    Oak.super.init(self, age)
+    self.weight = height
+end
+```
+
+- The init function will normally want to call its superclass’s implementation of **init** and must use the syntax above
 
 ---
 
-# Instancing & Destroying
+# OOP
+
+Let's make an example by putting the player logic in its class
+
+```lua
+-- player.lua
+
+import "CoreLibs/graphics"
+import "CoreLibs/sprites"
+
+gfx = playdate.graphics
+
+class("Player").extends(gfx.sprite)
+
+function Player:init(x, y)
+    Player.super.init(self)
+    self:setImage(gfx.image.new('player'))
+    self:moveTo(x, y)
+    self:addSprite()
+end
+```
+
+---
+
+# OOP
+
+Looks better now, don't you think?
+
+```lua
+import "CoreLibs/graphics"
+import "CoreLibs/sprites"
+import "player"
+
+gfx = playdate.graphics
+
+player = Player(200, 120)
+
+function playdate.update()
+  gfx.sprite.update()
+end
+```
+
+---
+
+# OOP
+
+```lua
+players = { Player(100, 120), Player(200, 120), Player(300, 120) }
+```
+
+# ![height:400px](images/three-players.png)
 
 ---
 
@@ -355,12 +449,13 @@ end
 
 # Where to put your game
 
-- Self-host it on your website
+- Unfortunately Playdate doesn't have a store (yet) so
+- You can self-host it on your website or
 - Put it or sell it on websites such as [itch.io](https://itch.io/)
 
 ---
 
-# Useful resources
+# Where to look for help
 
 - [SquidGodDev](https://www.youtube.com/c/SquidGodDev) excellent video tutorials
 - [Awesome Playdate](https://github.com/sayhiben/awesome-playdate) crowd-sourced awesomeness
