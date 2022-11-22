@@ -36,11 +36,11 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 # Brief history
 
-- Created by [Panic](https://panic.com/), a software house notable MacOS developer tools as a way to celebrate their 20th birthday
+- Created by [Panic](https://panic.com/), a notable Mac software house, as a way to celebrate their 20th birthday
 - Announced on May 2019
 - Started shipping on April 2022
 - $179 (w/ taxes & shipping: €280)
-- Comes with [24 exclusive games](https://play.date/games/)
+- Comes with [24 exclusive games](https://play.date/games/) for free (season one)
 
 ![bg right](images/Playdate-photo-4.jpeg)
 
@@ -50,7 +50,7 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 **Display**
 
-- Monochrome 1-bit memory LCD display, 400x240px resolution
+- Monochrome 1-bit memory LCD display, 400x240px resolution *(similar to an e-ink)*
 - Refreshed at 30 fps by default, maximum 50 fps
 
 **Controls**
@@ -71,7 +71,7 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 - [Visual Studio Code](https://code.visualstudio.com/) on Windows, Mac and Linux
 - [Nova](https://nova.app/) on Mac (recommended but $$$)
 - Playdate Simulator (included in the SDK)
-- A Playdate (if you have one)
+- A Playdate _(if you have one)_
 
 ---
 
@@ -102,6 +102,7 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 - Make sure you have Visual Studio Code installed
 - Download the [Playdate extension](https://marketplace.visualstudio.com/items?itemName=Orta.playdate)
 - Fork the Visual Studio Code template for [Windows](https://github.com/Whitebrim/VSCode-PlaydateTemplate) or for [MacOS](https://github.com/cadin/playdate-vscode-template)
+- Specify our project’s _Source_ folder. It will use _./Source_ or _./source_ by default
 - Ctrl/Cmd + Shift + P → **Run app in Playdate Simulator**
 
 ---
@@ -125,10 +126,12 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 # Hello world!
 
 ```lua
+-- main.lua
+
 print("Hello world!")
 ```
 
-# ![height:400px center](images/hello-world.png)
+# ![height:325px center](images/hello-world.png)
 
 ---
 
@@ -161,14 +164,14 @@ end
 print(add(10, 20))  -- Returns 30
 ```
 
-- In that syntax, a function definition has a name (add), a list of parameters (a and b), and a body, which is a list of statements
+- In that syntax, a function definition has a name *(add)*, a list of parameters *(a and b)*, and a body, which is a list of statements
 
 ---
 
 # Tables
 
-- The table type implements associative arrays
-- An associative array is an array that can be indexed not only with numbers, but also with strings or any other value of the language
+- The table type are associative arrays
+- Associative arrays are similar to **PHP** arrays or **Javascript** objects, they are key/value containers that can also be used as lists
 - Tables have no fixed size, you can add as many elements as you want to a table dynamically
 
 ```lua
@@ -222,7 +225,7 @@ end
 
 # Loops
 
-- The basic Lua library provides **pairs** a handy function that allows you to iterate over the elements of a table
+- The basic Lua library provides **pairs**, a handy function that allows you to iterate over the elements of a table
 
 ```lua
 a = {}
@@ -423,11 +426,11 @@ class('Cat').extends(Animal)
 ```lua
 function Cat:init(age, weight)
     Cat.super.init(self, age)
-    self.weight = height
+    self.weight = weight
 end
 ```
 
-- The **init** function will normally want to call its superclass’s implementation of **init** and must use the syntax above
+- The **init** function will call its superclass’s implementation of **init**
 
 ---
 
