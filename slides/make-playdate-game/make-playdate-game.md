@@ -111,7 +111,7 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 - Make sure you have Nova installed
 - Install the [Playdate extension](https://extensions.panic.com/extensions/com.panic/com.panic.Playdate/)
-- Click on the project name in the top left of the window tooolbar
+- Click on the project name in the top left of the window toolbar
 - In the **Build & Run section** of the resulting dialog, click the **plus** button
 - Choose **Playdate Simulator** from the list of options to create a new configuration
 - Specify our project’s _Source_ folder. It will use _./Source_ or _./source_ by default
@@ -233,7 +233,7 @@ a[10] = "Hello"
 a["x"] = "World"
 
 for key, value in pairs(a) do
-    print(key .. " - " .. value)  -- Concats strings with ..
+    print(key .. " - " .. value)  -- Concat strings with ..
 end
 
 -- Output:
