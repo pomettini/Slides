@@ -4,8 +4,7 @@ marp: true
 
 <!-- $size: A3 -->
 
-Getting started with cross-platform UI in Rust
-===
+# Getting started with cross-platform UI in Rust
 
 ##### Discovering `libui-rs`, a simple and portable cross-platform UI that doesn't suck
 
@@ -14,6 +13,7 @@ Getting started with cross-platform UI in Rust
 ---
 
 # What we're going to have today
+
 - Why using `libui` as a cross-platform GUI library
 - How to use the `libui-rs` library
 - Have a look at every UI control
@@ -27,9 +27,10 @@ Getting started with cross-platform UI in Rust
 
 ##### Or: why are you not using `QT` like everyone sane human?
 
---- 
+---
 
 # Why using `libui` as a cross-platform GUI library
+
 - `QT` is great but...
 - If you want to statically link the DLL you have to get a license
 - Or you have to bundle your app with a `QT` installer
@@ -38,6 +39,7 @@ Getting started with cross-platform UI in Rust
 ---
 
 # Why using `libui` as a cross-platform GUI library
+
 - What about `GTK`?
 - Sure `GTK` is great but...
 - It looks terrible on Windows and macOS :(
@@ -45,6 +47,7 @@ Getting started with cross-platform UI in Rust
 ---
 
 # Why using `libui` as a cross-platform GUI library
+
 - What about `azul` or other Electron-based libraries?
 - Sure they works fine, but I really wanted to make a native app
 - (I'm not against Electron by the way, I think it's great!)
@@ -52,6 +55,7 @@ Getting started with cross-platform UI in Rust
 ---
 
 # So what is the state of GUI in Rust?
+
 - Currently is a bit in early stage at the moment
 - Have a look at https://areweguiyet.com/ for reference
 - Also: https://users.rust-lang.org/t/current-state-of-gui-development-in-rust/
@@ -59,6 +63,7 @@ Getting started with cross-platform UI in Rust
 ---
 
 # Discovering `libui-rs` or `iui`
+
 - `iui` is a **simple** (about 4 kLOC of Rust)
 - **Small** (about 800kb, including `libui`)
 - **Easy to distribute** (one shared library)
@@ -67,10 +72,11 @@ Getting started with cross-platform UI in Rust
 ---
 
 # Discovering `libui-rs` or `iui`
+
 - `iui` wraps native retained mode GUI libraries:
-	- Win32API on Windows
-	- Cocoa on macOS
-	- GTK+ on Linux
+  - Win32API on Windows
+  - Cocoa on macOS
+  - GTK+ on Linux
 
 ---
 
@@ -157,7 +163,7 @@ fn main() {
 fn main() {
     let ui = UI::init().unwrap();
     let mut win = Window::new(&ui, "Hello Rust Rome", 200, 200, WindowType::NoMenubar);
-    
+
     let mut vbox = VerticalBox::new(&ui);
 
     let mut label = Label::new(&ui, "I'm a Label");
@@ -188,6 +194,7 @@ fn main() {
 # Positioning elements
 
 You can set a padding on a `vbox` using
+
 ```rust
 vbox.set_padded(&ui, true);
 ```
@@ -201,7 +208,7 @@ vbox.set_padded(&ui, true);
 - **Compact:** Uses the minimum possible size to contain its content
 - **Stretchy:** Make the control expand to its maximum size
 
-This is an example with all the controls set to **Stretchy**: 
+This is an example with all the controls set to **Stretchy**:
 
 # ![](rustgui4.png)
 
@@ -283,7 +290,7 @@ fn main() {
 
     let mut button = Button::new(&ui, "I'm a Button");
     vbox.append(&ui, button.clone(), LayoutStrategy::Compact);
-	
+
     button.on_clicked(&ui, {
         let ui = ui.clone();
         move |btn| {
@@ -349,7 +356,7 @@ fn main() {
     ...
 
     let mut button = Button::new(&ui, "Open Modal");
-    
+
     button.on_clicked(&ui, {
         let ui = ui.clone();
         let win = win.clone();
@@ -370,6 +377,7 @@ fn main() {
 # Message/error modal windows
 
 # ![](rustgui8.png)
+
 # ![](rustgui9.png)
 
 ---
@@ -381,7 +389,7 @@ fn main() {
     ...
 
     let mut button = Button::new(&ui, "Open Modal");
-    
+
     button.on_clicked(&ui, {
         let ui = ui.clone();
         let win = win.clone();
@@ -411,7 +419,6 @@ fn main() {
 # Passing the state around
 
 Sometimes you may have a lot of states you want to move between controls, in that case you use a **struct** to hold all the values
-
 
 ```rust
 struct State {
@@ -478,7 +485,7 @@ fn test_change_label() {
 Nope.
 
 ```console
-You have a bug: Some data was leaked; 
+You have a bug: Some data was leaked;
 either you left a uiControl lying around or there's a bug in libui itself. Leaked data:
 0x7fca1941ebd0 uiLabel
 error: process didn't exit successfully: (signal: 4, SIGILL: illegal instruction)
@@ -533,7 +540,7 @@ test test_change_label ... ok
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 ```
 
-**Warning:** The GUI stuff runs on the main thread so be sure to turn off tests on multiple threads 
+**Warning:** The GUI stuff runs on the main thread so be sure to turn off tests on multiple threads
 `RUST_TEST_THREADS=1 cargo test`
 
 ---
@@ -562,4 +569,5 @@ For other kind of projects, I'd wait a little bit more :)
 ### https://github.com/pomettini
 
 Copyright &copy; 2019 [Giorgio Pomettini](https://github.com/Pomettini)
-This software released under the [MIT License](https://github.com/yhatt/marp/blob/master/LICENSE).
+
+This software released under the [MIT License](https://github.com/yhatt/marp/blob/master/LICENSE)

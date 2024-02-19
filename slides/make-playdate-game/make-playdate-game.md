@@ -50,7 +50,7 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 **Display**
 
-- Monochrome 1-bit memory LCD display, 400x240px resolution *(similar to an e-ink)*
+- Monochrome 1-bit memory LCD display, 400x240px resolution _(similar to an e-ink)_
 - Refreshed at 30 fps by default, maximum 50 fps
 
 **Controls**
@@ -164,7 +164,7 @@ end
 print(add(10, 20))  -- Returns 30
 ```
 
-- In that syntax, a function definition has a name *(add)*, a list of parameters *(a and b)*, and a body, which is a list of statements
+- In that syntax, a function definition has a name _(add)_, a list of parameters _(a and b)_, and a body, which is a list of statements
 
 ---
 
@@ -545,6 +545,6 @@ But you can find all your answers on [Inside Playdate](https://sdk.play.date/)
 
 # Thank you!
 
-Slides available at _https://github.com/Pomettini/Slides_
+Slides available at _[https://github.com/Pomettini/Slides](https://github.com/Pomettini/Slides)_
 
 **Questions?**
