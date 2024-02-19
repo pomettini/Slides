@@ -22,20 +22,20 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 # Team
 
 - Failed artist turned programmer
-- Went to my first **GGJ** in 2013 and won a prize by **Filas**, now **Lazio Innova**
+- Went to my first **GGJ** in 2013 and won a prize\* by **Filas**, now **[Lazio Innova](https://www.lazioinnova.it/)**
 - Went to more than 30 game jams between **Rome**, **Sweden**[\*](https://www.nomoresweden.com/)[\*](https://www.facebook.com/castlegamejam/) and **Slovenia**[\*](https://creative-goods.si/en/multimedia-production/outfit7-talent-camp-2019/)
-- Going to my first **GGJ** kickstarted my carreer in game development
+- Going to my first **GGJ** kickstarted my carrer in game development
 
 ![bg right](images/dannymetal.jpeg)
 
 ---
 
-# Wtf, did they have prizes? <!-- fit -->
+# \*Wtf, did they have prizes? <!-- fit -->
 
 - Well, sorta
-- We were invited to pitch our game in an event in **Heidelberg** 🇩🇪 by **Lazio Innova**
-- Got to pitch the game in English _(and it was embarassing)_
-- But I got to know the folks from [Gamepix](https://www.gamepix.com/) who later offered me **my first ever game development job**
+- We were invited to pitch our game in an event in **Heidelberg** 🇩🇪 _(**Filas** kindly paid all the travel expenses)_
+- Got to pitch the game in English _(and it was embarrassing)_
+- But I met the founders of [Gamepix](https://www.gamepix.com/) who later offered me **my first ever game development job**
 
 ![bg right](images/heidelberg.jpeg)
 
@@ -76,7 +76,7 @@ _(Yeah, you're right, sorry)_
 
 - I got to finish the game _(yay!)_
 - The scope was tiny so I had found time to sleep
-- Shared table with my bros who were fun and supportive ❤️
+- Shared the table with my bros who were fun and supportive ❤️
 
 ---
 
@@ -112,7 +112,7 @@ _(Yeah, you're right, sorry)_
 - 4 GB Flash
 - Comparable to a DSi but without hardware acceleration
 - $199 + shipping + taxes _(~€266)_ but it comes with 24 free games
-- Every console is a devkit
+- Every device [is a devkit](https://play.date/dev/)
 
 ![bg right](images/playdate.jpeg)
 
@@ -132,7 +132,7 @@ _(Yeah, you're right, sorry)_
 # Rust vs C benchmark
 
 - [Wrote a port](https://github.com/Pomettini/starfield-playdate-rs) of a [Starfield sketch](https://thecodingtrain.com/challenges/1-starfield) _(not [the game](https://bethesda.net/it/game/starfield))_ for fun
-- In **Rust** I was able to draw 600 rays at 50 fps
+- In **Rust** I was able to draw **600 rays at 50 fps**
 - Drawing more than 600 rays would throw a **stack overflow** 🤔
 
 ![](images/preview_rust.gif)
