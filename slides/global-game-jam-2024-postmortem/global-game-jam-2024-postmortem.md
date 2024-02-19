@@ -142,7 +142,7 @@ _(Yeah, you're right, sorry)_
 # Rust vs C benchmark
 
 - By [writing the same script in **C**](https://github.com/Pomettini/starfield-playdate-c) I was able to achieve **10000 rays at 25 fps**
-- But then I discovered that the [**Playdate** has a stack size of 61.8kB](https://devforum.play.date/t/debugging-c-crashes-on-device-understanding-hardware-limits/6129)
+- But then I discovered that the [**Playdate** has a stack size of 61.8kb](https://devforum.play.date/t/debugging-c-crashes-on-device-understanding-hardware-limits/6129)
 - The **Rust** port using the heap was able to achieve the same performance 🔥
 
 ![](images/preview_c.gif)
