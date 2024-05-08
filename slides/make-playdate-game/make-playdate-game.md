@@ -13,11 +13,11 @@ style: |
 
 # Let's make a game for the Playdate
 
-**Also called "the Game Boy redesigned for the age of Netflix"**
+**Also called the banana boy** 🍌
 
 Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
-![bg right](images/Playdate-photo.png)
+![bg right 133%](images/Playdate-photo.png)
 
 ---
 
@@ -28,7 +28,7 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 - Making a player moving on the screen
 - How to use the Crank (duh)
 - Where to look for help
-- Profit _(yes really!)_
+- Profit 💸 _(yes really!)_
 
 ![bg right](images/Playdate-photo-3.jpeg)
 
@@ -36,7 +36,7 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 # Brief history
 
-- Created by [Panic](https://panic.com/), a notable Mac software house, as a way to celebrate their 20th birthday
+- Created by [Panic](https://panic.com/), a notable Mac software house, as a way to celebrate their 20th birthday 🎂
 - Announced on May 2019
 - Started shipping on April 2022
 - $179 (w/ taxes & shipping: €280)
@@ -50,7 +50,7 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 **Display**
 
-- Monochrome 1-bit memory LCD display, 400x240px resolution _(similar to an e-ink)_
+- Monochrome 1-bit memory LCD display, 400x240px resolution (similar to an e-ink)
 - Refreshed at 30 fps by default, maximum 50 fps
 
 **Controls**
@@ -60,7 +60,7 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 **Sound:** Internal speaker, microphone, headphone jack
 **Connectivity:** Wi-Fi, Bluetooth
-**Memory & Storage:** 16MB _(yes, megabytes!)_ RAM, 4GB flash storage
+**Memory & Storage:** 😱 16MB _(yes, megabytes!)_ of RAM , 4GB of flash storage
 
 ---
 
@@ -84,7 +84,7 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 ---
 
-# ![height:600px center](images/pulp.png)
+# ![height:650px center](images/pulp.png)
 
 ---
 
@@ -93,7 +93,7 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 - Download the [Playdate SDK](https://play.date/dev/)
 - Launch the Playdate Simulator
 
-# ![height:350px center](images/playdate-simulator.png)
+![bg right 85%](images/playdate-simulator.png)
 
 ---
 
@@ -119,7 +119,7 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 ---
 
-# ![height:600px center](images/nova.png)
+# ![height:650px center](images/nova.png)
 
 ---
 
@@ -396,7 +396,7 @@ end
 
 ---
 
-# ![height:600px center](images/playdate-simulator-full.png)
+# ![height:650px center](images/playdate-simulator-full.png)
 
 ---
 
@@ -494,26 +494,29 @@ players = { Player(100, 120), Player(200, 120), Player(300, 120) }
 
 ---
 
-# Where to put your game
+# Where to release your game
 
-- Unfortunately Playdate doesn't have a store (yet) so
-- You can self-host it on your website or
-- Put it or sell it on websites such as [itch.io](https://itch.io/)
+- A game package is a single **.pdx** file that you can put wherever you want!
+- You can self-host it on your website...
+- Put it or sell it on websites such as [itch.io](https://itch.io/)...
+- Did you know that Playdate has a store called [Catalog](https://play.date/games/catalog/)? ([Here you can submit games](https://panic-inc.typeform.com/catalog?typeform-source=help.play.date))
 
-# ![height:75px](images/itchio.png)
-
-_PS: Panic is offering funding for games, check the [Game Pitch Form](https://panic-inc.typeform.com/playdate-pitch?typeform-source=play.date) for more info_
+# ![height:250px center](images/catalog-preview.jpg)
 
 ---
 
-# ![height:600px center](images/itchio-playdate.png)
+# ![height:650px center](images/catalog.png)
+
+---
+
+# ![height:650px center](images/itchio-playdate.png)
 
 ---
 
 # Where to look for help
 
 - [Playdate Developer Forum](https://devforum.play.date/)
-- [Playdate Squad](https://discord.com/invite/zFKagQ2) aka the most active Discord server
+- [Playdate Squad](https://discord.com/invite/zFKagQ2) aka the most active **Discord** server
 - [/r/PlaydateConsole](https://www.reddit.com/r/PlaydateConsole/) and [/r/PlaydateDeveloper](https://www.reddit.com/r/PlaydateDeveloper/)
 
 #### And if you want to learn more
@@ -530,14 +533,26 @@ _PS: Panic is offering funding for games, check the [Game Pitch Form](https://pa
 
 ---
 
-# Things I didn't cover (yet)
+# I'm not keen on Lua and C, what else can I use?
+
+Glad you asked!
+
+- [Rust](https://github.com/pd-rs/crankstart) (I gave [a talk](https://github.com/pomettini/Slides/tree/main/slides/global-game-jam-2024-postmortem) about using it and also [made a game](https://globalgamejam.org/games/2024/train-ciampino-3), with [full source](https://github.com/pomettini/ggj-2024) available)
+- [Swift](https://devforum.play.date/t/using-the-swift-programming-language-on-playdate/4182)
+- [Zig](https://github.com/DanB91/Zig-Playdate-Template)
+- [Nim](https://devforum.play.date/t/playdate-nim-bindings-c-performance-python-like-syntax/)
+- [Assembly](https://sgeos.github.io/gamedev/playdate/asm/arm/x86/2022/10/05/asm_playdate_development.html)
+- [Fortran](https://sgeos.github.io/gamedev/playdate/fortran/2022/10/10/fortran_playdate_development.html) 😱
+
+---
+
+# Things I didn't cover
 
 - Collisions
 - Audio
 - Accelerometer
 - Fonts
-- Debugging
-- Deploying on a real device _(maybe for part 2?)_
+- Etc
 
 But you can find all your answers on [Inside Playdate](https://sdk.play.date/)
 
@@ -545,6 +560,8 @@ But you can find all your answers on [Inside Playdate](https://sdk.play.date/)
 
 # Thank you!
 
-Slides available at _[https://github.com/Pomettini/Slides](https://github.com/Pomettini/Slides)_
+Slides and source code available on _[https://github.com/pomettini/slides](https://github.com/pomettini/slides)_
 
-**Questions?**
+**Questions?** 🥰
+
+![bg right 100%](images/Playdate-2.png)
