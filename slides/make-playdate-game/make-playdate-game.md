@@ -26,7 +26,8 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 - Setting up a dev environment
 - Lua language overview
 - Making a player moving on the screen
-- How to use the Crank (duh)
+- How to use the Crank _(duh)_
+- Using the Simulator and deploying on a real device
 - Where to look for help
 - Profit 💸 _(yes really!)_
 
@@ -60,7 +61,7 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 **Sound:** Internal speaker, microphone, headphone jack
 **Connectivity:** Wi-Fi, Bluetooth
-**Memory & Storage:** 😱 16MB _(yes, megabytes!)_ of RAM , 4GB of flash storage
+**Memory & Storage:** 😱 16MB (yes, megabytes!) of RAM , 4GB of flash storage
 
 ---
 
@@ -552,7 +553,7 @@ Glad you asked!
 - Audio
 - Accelerometer
 - Fonts
-- Etc
+- _Etc_
 
 But you can find all your answers on [Inside Playdate](https://sdk.play.date/)
 
@@ -560,7 +561,7 @@ But you can find all your answers on [Inside Playdate](https://sdk.play.date/)
 
 # Thank you!
 
-Slides and source code available on _[https://github.com/pomettini/slides](https://github.com/pomettini/slides)_
+Slides and source code available on [https://github.com/pomettini/slides](https://github.com/pomettini/slides)
 
 **Questions?** 🥰
 
