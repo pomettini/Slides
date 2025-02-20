@@ -11,11 +11,15 @@ style: |
 
 <center>
 
-# Bobble is You Postmortem
+# [Bobble is You](https://pomettini.itch.io/bobble-is-you) Postmortem
 
 Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
-</center>
+<center>
+
+---
+
+![bg width: 46% drop-shadow](images/owned.jpg)
 
 ---
 
@@ -102,7 +106,9 @@ It's complicated, let me explain...
 
 - We had so many ideas
 - But then at some point I said:
-- _"What if we made all of them at the same time?"_ 😈
+- _"What if we made all of them at the same time?"_
+- Made a quick prototype with three vertical bars to test mechanics
+- At Friday night we started _cranking_ 💪
 
 ---
 
@@ -123,6 +129,7 @@ It's complicated, let me explain...
 - I <3 to make **Playdate** games
   - Build times are 1000x times faster than Unity
   - Technical limitations = _(almost)_ no overscoping
+  - [Documentation](sdk.play.date/2.6.2/#developing-in-lua) is great
 - It's good to work in a team again ❤️
 
 ---
