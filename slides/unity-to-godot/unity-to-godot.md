@@ -2,7 +2,6 @@
 title: Global Game Jam 2024 Postmortem
 marp: true
 theme: default
-paginate: true
 style: |
   ul {
     padding: 0 1em;
@@ -51,9 +50,13 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 ---
 
-## Hi I'm Pomettini
+## Hi I'm Pomettini and I make weird games for fun and for profit
 
-// Inserire foto montaggio con tutte le cose per cui ho sviluppato
+<center>
+
+![height:500px](images/weird_devices.png)
+
+</center>
 
 ---
 
@@ -87,8 +90,8 @@ Well, you gotta start somewhere...
 ## Look...
 
 - I understand your frustration. I've been there, I swear...
-- In order to learn Godot, you must understand that Godot is not open-source Unity
-- Unity is Unity and Godot is Godot
+- In order to learn **Godot**, you must understand that <ins>**Godot is not open-source Unity**</ins>
+- **Unity is Unity** and **Godot is Godot**
 - But I see you're a busy person, and I don't want to waste your time
 - Here we go...
 
@@ -96,22 +99,22 @@ Well, you gotta start somewhere...
 
 ## I want to create a scene, where are scenes?
 
-- In Godot there are scenes, but they work differently from Unity
-- Godot scenes are a tree of nodes
+- In **Godot** there are **scenes**, but they work differently from **Unity**
+- **Godot scenes** are just a **tree of nodes**
 
-_So they are like... prefabs?_
+_So they are like... **prefabs**?_
 
 - Yes
 
 _Surprised Pikachu face_
 
-- Let me put it like this: scenes in Godot are like Unity scenes, but they can also be be instaced like prefabs
+- Let me put it like this: **scenes** in **Godot** are like **Unity scenes**, but they can also be be **instaced like prefabs**
 
 ---
 
 ## Nodes? Oh, are those GameObjects?
 
-- Yes, _BUT_
+- Yes _BUT_
 - In Unity, **a prefab is a container for Components** _(Transform, SpriteRender, ecc)_
 - In Godot, a **node is like a GameObject with one built-in role** _(Sprite2D, Camera2D, ecc)_
 
@@ -121,16 +124,16 @@ _Surprised Pikachu face_
 
 - You will get used to it, trust me
 - Take a look at the complete list of nodes: each one does one and only one thing
-  - Node2D is the base class for everything that has a 2D position in the world
-  - AnimatedSprite2D is responsible for animating a sprite
-  - Line2D is responsible for displaying a line
+  - **Node2D** is the base class for **everything that has a 2D position** in the world
+  - **AnimatedSprite2D** is responsible for... well... **animating a sprite**
+  - **Line2D** is responsible for **drawing a line** in the 2D view
   - And so on...
-- Don't you see the one you're looking for? Make your own!
-- Also, you can attach one (ONE!) script to each node to add behaviour
+- Don't you see the one you're looking for? **Make your own!**
+- Also, you can attach **one (ONE!) script** to each node to add behaviour
 
 ---
 
-## Ok but how am I supposed to make a player with only one script?
+## Ok but how am I supposed to make a Player with only one script?
 
 You should start to see it by now...
 
@@ -140,7 +143,7 @@ Every node should be a children of the base node
 
 ---
 
-## I made a Player script, now how do I move it?
+## I have made a Player script, now how do I move it?
 
 ```gdscript
 extends CharacterBody2D
@@ -164,7 +167,7 @@ func _process(delta: float) -> void:
 
 - Let's check the [**CharacterBody2D** documentation](https://docs.godotengine.org/en/stable/classes/class_characterbody2d.html)...
 
-**CharacterBody2D** is a specialized class for physics bodies that are meant to be user-controlled. [...] They are mainly used to provide high-level API to move objects with wall and slope detection **(move_and_slide() method)**
+_**CharacterBody2D** is a specialized class for physics bodies that are meant to be user-controlled. [...] They are mainly used to provide high-level API to move objects with wall and slope detection (`move_and_slide()` method)_
 
 ```gdscript
 func _process(delta: float) -> void:
@@ -173,14 +176,16 @@ func _process(delta: float) -> void:
     move_and_slide()
 ```
 
+- Trust me, <ins>**always check the documentation first**</ins>, it's so well done
+
 ---
 
 ## Cool! Now I want to shoot, how do I instantiate a projectile?
 
 - Closer to what you would do in **Unity**, actually
-- First, go to **Project Settings** > **Input Map** and **add a new action** called `shoot`
+- First, go to **Project Settings** > **Input Map** and **add a new action** called ∂`shoot`
 - Create a **Character2D node** and call it **Projectile**
-- Make sure to assign your **projectile node** to `player_projectile` in the inspector
+- Make sure to assign your **projectile node** to `player_projectile` in the **inspector**
 
 ```gdscript
 @export var player_projectile: PackedScene
@@ -194,32 +199,32 @@ func _process(delta: float) -> void:
 
 ---
 
-## I wanted to destroy my bullet after a second but... wait, where are Coroutines?
+## My bullet should explode after 1s but... wait, where are Coroutines?
 
-- Introducing the Timer node!
+- Introducing the **timer** node!
 
-![height:250px](images/timer_node.png)
+![height:300px](images/timer_node.png)
 
-- You can put the timer on autostart, or start it by calling the `start()` method
-- When the timer reaches the end, it will emit the timeout signal
+- You can put the **timer** on **autostart**, or **start** it by calling the `start()` method
+- When the **timer** reaches the end, it will emit the **timeout signal**
 
 ---
 
 ## Signal? Is it like... an Event?
 
-- Yes! And you can assign them directly in the editor!
+- Yes! And you can **assign them directly in the editor**!
 
 ![height:350px](images/signals.png)
 
-- Just double click on the signal you want to assign and it will create a function for you!
+- Just **double click on the signal** you want to assign and it will **create a function** for you!
 
 ---
 
 ## That is nice, but I want to bind them by code
 
-- No problem, here's how to do it
+- No problem, here's how to do it:
 
-```
+```gdscript
 func _ready() -> void:
     $Timer.timeout.connect(_on_timer_timeout)
 
@@ -228,16 +233,16 @@ func _on_timer_timeout():
     queue_free()
 ```
 
-- The dollar sign on Timer is used to quickly access nodes in the scene tree by their path (in that case, just its name)
-- The queue_free function schedules a node to be removed from the scene safely at the end of the current frame (basically, the equivalent to Destroy() in Unity)
+- The dollar sign on **Timer** is used to **quickly access nodes in the scene tree by their path** (in that case, just its name)
+- The `queue_free` function schedules a node to be **removed from the scene safely at the end of the current frame** (basically, the equivalent to `Destroy()` in **Unity**)
 
 ---
 
 ## You didn't answered me btw, where are Coroutines?
 
-- You can make every GDScript function async just by adding await inside the function
+- You can make every **GDScript** function **asynchronous** just by adding `await` inside the function
 
-```
+```gdscript
 @export var destroy_after := 1.0
 
 
@@ -246,5 +251,155 @@ func _ready() -> void:
     queue_free()
 ```
 
-- This snippet creates a timer that, when the timeout is reached, destroys the object that is attached to
+- This snippet **creates a timer** that, when the **timeout is reached**, **destroys** the object that is attached to
 - Pretty cool isn't it?
+
+---
+
+## I think I need a GameManager, does Godot support singletons?
+
+- **Godot** has its unique way to handle **singletons** and are called **autoloads**
+- An **autoload** is a **script** or **scene** that is **automatically loaded** and **always available**
+- Go to Project Settings > Autoload tab > Select your script or scene and give it a name
+
+  ![height:150px](images/autoloads.png)
+
+- Now you can access it like this:
+
+```gdscript
+GameManager.score += 10
+GameManager.reset_score()
+```
+
+---
+
+## ScreenManager, where is it? I need to change a scene, oh wait...
+
+- Though scenes work differently in **Godot**, there is a method that closely resembles what you would expect from `ScreenManager.LoadScene`
+
+```
+get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
+```
+
+- This **unloads the current scene and loads a new one**, just like **Unity's** `LoadScene`
+- Heavy scene? Loading is chugging the game? No problem
+
+```gdscript
+const MAIN_MENU_SCENE := preload("res://scenes/MainMenu.tscn")
+
+get_tree().change_scene_to_packed(MAIN_MENU_SCENE)
+```
+
+- **Preload** can also be used for **every resource in the game**!
+
+---
+
+## My beloved ScriptableObjects, I miss them...
+
+- I feel that too...
+- Luckily, Godot has its data container too: **Resources**
+- Want to create your custom Resource? Create a script and let it inherit from Resource
+- Then you can create your custom made Resource by right-clicking on FileSystem > Create New > Resource > YourCustomResource
+
+---
+
+## I want to save Player's best score... does Godot have PlayerPrefs?
+
+- Short answer: **no**
+- But what if I tell you that you can use **resources** to save data?
+- Let's make a **PlayerData** custom **resource**:
+
+```gdscript
+class_name PlayerData
+extends Resource
+
+@export var player_name: String
+@export var score: int
+```
+
+Continues in the next slide...
+
+---
+
+### Saving data example:
+
+```gdscript
+func save_player_data():
+    var data = PlayerData.new()
+    data.player_name = "Pomettini"
+    data.score = 151
+
+    var save_path = "user://player_data.res"
+    var error = ResourceSaver.save(save_path, data)
+
+    if error != OK:
+        print("Failed to save player data.")
+    else:
+        print("Player data saved.")
+```
+
+- Data will be saved at `OS.get_user_data_dir()` in **binary** format
+- You can use **ResourceSaver** to save pretty much anything, <ins>**even scenes!**</ins>
+
+---
+
+### Loading data example:
+
+```gdscript
+func load_player_data():
+    var save_path = "user://player_data.res"
+
+    if not FileAccess.file_exists(save_path):
+        print("No save file found.")
+        return
+
+    var loaded = ResourceLoader.load(save_path) as PlayerData
+
+    if loaded == null:
+        print("Failed to load player data.")
+        return
+```
+
+- **ResourceLoad** is a **safe** and sandboxed approach to **load resources**: avoids remote code execution and it's resistant to tampering (but you still **need to check types!**)
+
+---
+
+## Okay but my jam ends in 1h and I need a faster approach...
+
+```gdscript
+func save_data():
+    var config = ConfigFile.new()
+    config.set_value("player", "name", "Pomettini")
+    config.set_value("player", "score", 151)
+    config.save("user://save.cfg")
+
+func load_data():
+    var config = ConfigFile.new()
+    var err = config.load("user://save.cfg")
+    if err == OK:
+        var name = config.get_value("player", "name", "DefaultName")
+        var score = config.get_value("player", "score", 0)
+```
+
+- This works exactly like **Unity's PlayerPrefs** and works well for prototypes
+
+---
+
+## I want to learn more, where should I look?
+
+- Paid resources:
+  - [GDQuest's courses](https://www.gdquest.com/) (recommended)
+  - [Create a 2D Survivors Style Game in Godot](https://www.udemy.com/course/create-a-complete-2d-arena-survival-roguelike-game-in-godot-4/) from [Firebelley](https://www.youtube.com/@FirebelleyGames) (very recommended)
+- Free resources:
+  - [GDQuest's YouTube channel](https://www.youtube.com/@Gdquest)
+  - [Bacon and Games](https://www.youtube.com/@baconandgames)
+  - [Godot Engine Official YouTube channel](https://www.youtube.com/@GodotEngineOfficial)
+  - [Official Godot Docs](https://docs.godotengine.org/en/stable/) (read it like if it was the bible)
+
+---
+
+# Thank you!
+
+**Slides:** https://github.com/pomettini/slides/
+
+Special thanks to **[Nohu Games](https://nohu-games.itch.io/)** 🫶 _(sorry that I lied, I didn't know Godot back then)_
