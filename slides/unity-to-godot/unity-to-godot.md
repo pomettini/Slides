@@ -38,7 +38,7 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 <center>
 
-## Growing up, I want to <strike>be a pirate</strike> make videogames!
+### Growing up, I want to <strike>be a pirate</strike> make videogames!
 
 </center>
 
@@ -46,7 +46,25 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 ## Me in 2010
 
-// Inserire libro di Unity
+<center>
+
+![height:400px](images/unity_book_opened.jpg)
+
+</center>
+
+_(Had to buy this book in the UK because Amazon Italy didn't exist back then)_
+
+---
+
+## Me in 2010
+
+_It was going great, until I read the word **Quaternions**..._
+
+<center>
+
+![height:400px](images/unity_book_closed.jpg)
+
+</center>
 
 ---
 
@@ -76,12 +94,12 @@ Well, you gotta start somewhere...
 
 ## Yeah it seems familiar but...
 
-- I want to create a scene, where are scenes?
-- Nodes? Oh, are those GameObjects?
-- Wtf why there are so many nodes?
-- How am I supposed to make a player with only one script?
-- Ok I made a script, now how do I move the Player?
-- My player is not moving, why?
+- I want to create a **scene**, where are **scenes**?
+- **Nodes**? Oh, are those **GameObjects**?
+- Wtf why there are so many **nodes**?
+- How am I supposed to make a **Player** with only **one script**?
+- Ok I made a **script**, now how do I move the **Player**?
+- My **Player** is not moving, why?
   ...
 - Thing in Unity were so simple, why should I switch?
 
@@ -183,7 +201,7 @@ func _process(delta: float) -> void:
 ## Cool! Now I want to shoot, how do I instantiate a projectile?
 
 - Closer to what you would do in **Unity**, actually
-- First, go to **Project Settings** > **Input Map** and **add a new action** called ∂`shoot`
+- First, go to **Project Settings** > **Input Map** and **add a new action** called `shoot`
 - Create a **Character2D node** and call it **Projectile**
 - Make sure to assign your **projectile node** to `player_projectile` in the **inspector**
 
@@ -216,7 +234,7 @@ func _process(delta: float) -> void:
 
 ![height:350px](images/signals.png)
 
-- Just **double click on the signal** you want to assign and it will **create a function** for you!
+- Just **double click on the signal** you want to assign and it will create a function for you!
 
 ---
 
@@ -256,11 +274,38 @@ func _ready() -> void:
 
 ---
 
+## I want my projectile to hit stuff, how does collisions work?
+
+- Like in **Unity**, **collision** happens when **two physics objects overlap** _(duh!)_
+- In **Godot** we have different **nodes**, each one for a different use case:
+  - **StaticBody2D** (objects that doesn't move: _walls, floors, etc_)
+  - **RigidBody2D** (objects that are affected by physics indirectly: _boxes, ecc_)
+  - **CharacterBody2D** (objects moved by the player or AI)
+  - **Area2D** (objects that detects the presence of other objects but are not solid)
+- You should also add a **CollisionShape2D** as a child of the physics body and, from the **inspector**, **add a new shape** _(RectangleShape2D, CircleShape2D, etc)_
+- Continues in the next slide...
+
+---
+
+## I want my projectile to hit stuff, how does collisions work?
+
+![height:300px](images/collisions.png)
+
+- Collision **layers** detect what can **detect ME**
+- Collision **marks** detect what **I can detect**
+- Please [watch this 43s video](https://www.youtube.com/watch?v=9k8cMzv0ZNo), he explains it way better than me
+
+---
+
+// Slides about pausing the game
+
+---
+
 ## I think I need a GameManager, does Godot support singletons?
 
 - **Godot** has its unique way to handle **singletons** and are called **autoloads**
 - An **autoload** is a **script** or **scene** that is **automatically loaded** and **always available**
-- Go to Project Settings > Autoload tab > Select your script or scene and give it a name
+- Go to **Project Settings** > **Autoload** tab > Select your script/scene and give it a name
 
   ![height:150px](images/autoloads.png)
 
@@ -297,9 +342,9 @@ get_tree().change_scene_to_packed(MAIN_MENU_SCENE)
 ## My beloved ScriptableObjects, I miss them...
 
 - I feel that too...
-- Luckily, Godot has its data container too: **Resources**
-- Want to create your custom Resource? Create a script and let it inherit from Resource
-- Then you can create your custom made Resource by right-clicking on FileSystem > Create New > Resource > YourCustomResource
+- Luckily, Godot has its data container too: **resources**
+- Want to create your **custom resource**? Create a **script** and let it **inherit from resource**
+- Then you can create your custom made resource by right-clicking on the **FileSystem** dock and **Create New** > **Resource** > **YourCustomResource**
 
 ---
 
@@ -385,16 +430,39 @@ func load_data():
 
 ---
 
+## Btw coming from Unity the interface looks so caothic...
+
+- I get that, here's some tweaks you can do:
+- Create an [editor profile](https://docs.godotengine.org/en/latest/tutorials/editor/managing_editor_features.html) (you can **hide stuff** you won't use, like XR stuff)
+  - You can even **hide all the 3D stuff** if you're making a **2D game**
+- From **Editor Settings** > **General** > **Inspector** > **Disable Folding** (check this to avoid sections to be collapsed in the inspector, you can find properties easily this way)
+- Install [PassiveStar's Godot Theme](https://github.com/passivestar/godot-minimal-theme) (trust me, it looks way better)
+- Bonus tip: **Project Settings** > **Debug** > **GDScript** > Set **Untyped Declaration** to **Warn** (saves you lots of headaches by enforcing static typing)
+
+---
+
+### Things I also wanted to talk about <strike>but I was playing Mario Kart World help</strike>
+
+- **Godot's** internal [**tweening system**](https://docs.godotengine.org/en/stable/classes/class_tween.html) (seriously look at this)
+- **Godot's** internal [**localization system**](https://docs.godotengine.org/en/stable/tutorials/i18n/internationalizing_games.html)
+- How to write **shaders** ([Godot Shaders](https://godotshaders.com/) is a great website with cool **examples**)
+- How does [**UI**](https://docs.godotengine.org/en/stable/tutorials/ui/index.html) work in **Godot** (I might write an entire talk about that...)
+- How to use [**VSCode**](https://code.visualstudio.com/) in **Godot** instead of its internal editor
+- How to use **C#** or [other languages](https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html) with **Godot**
+- [**Exporting the project**](https://docs.godotengine.org/en/latest/tutorials/export/exporting_projects.html) on **PC** or [**WASM**](https://webassembly.org/) for the **web**
+
+---
+
 ## I want to learn more, where should I look?
 
 - Paid resources:
-  - [GDQuest's courses](https://www.gdquest.com/) (recommended)
-  - [Create a 2D Survivors Style Game in Godot](https://www.udemy.com/course/create-a-complete-2d-arena-survival-roguelike-game-in-godot-4/) from [Firebelley](https://www.youtube.com/@FirebelleyGames) (very recommended)
+  - [**GDQuest's** courses](https://www.gdquest.com/) (recommended)
+  - [Create a 2D Survivors Style Game in **Godot**](https://www.udemy.com/course/create-a-complete-2d-arena-survival-roguelike-game-in-godot-4/) from [**Firebelley**](https://www.youtube.com/@FirebelleyGames) (very recommended)
 - Free resources:
-  - [GDQuest's YouTube channel](https://www.youtube.com/@Gdquest)
+  - [**GDQuest's** YouTube channel](https://www.youtube.com/@Gdquest)
   - [Bacon and Games](https://www.youtube.com/@baconandgames)
-  - [Godot Engine Official YouTube channel](https://www.youtube.com/@GodotEngineOfficial)
-  - [Official Godot Docs](https://docs.godotengine.org/en/stable/) (read it like if it was the bible)
+  - [**Godot** Engine Official YouTube channel](https://www.youtube.com/@GodotEngineOfficial)
+  - [Official **Godot** Docs](https://docs.godotengine.org/en/stable/) (read it like if it was the bible)
 
 ---
 
