@@ -8,28 +8,6 @@ style: |
   }
 ---
 
-<!--
-
-- I want to create a scene, where are scenes?
-- Nodes? Oh, are those prefabs?
-- Wtf why there are so many nodes?
-- How am I supposed to make a player with only one script?
-- Ok I made a script, now how do I move the Player?
-- My player is not moving, why?
-- How do I spawn a projectile?
-- I see Godot has RigidBodies... but how do I do collision without layers?
-- I want to add a cooldown but... wait where are Coroutines?
-- // Events
-- I think I need a GameManager, does Godot support singletons?
-- Why there are so many options in the inspector? It's so annoying
-- How do I pause the game? Where is the timescale?
-- My beloved ScriptableObjects, I miss them...
-- There are no PlayerPrefs? How tf I'm supposed to save data?
-- I want to make a Game Over screen, how do I change scene?
-
-
--->
-
 # Back to Unity island (si va a Godotpoli)
 
 Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
@@ -52,7 +30,7 @@ Giorgio Pomettini ([@pomettini](https://github.com/pomettini))
 
 </center>
 
-_(Had to buy this book in the UK because Amazon Italy didn't exist back then)_
+_(Had to buy this book in the UK because **Amazon Italy** didn't exist back then)_
 
 ---
 
@@ -97,11 +75,11 @@ Well, you gotta start somewhere...
 - I want to create a **scene**, where are **scenes**?
 - **Nodes**? Oh, are those **GameObjects**?
 - Wtf why there are so many **nodes**?
-- How am I supposed to make a **Player** with only **one script**?
-- Ok I made a **script**, now how do I move the **Player**?
-- My **Player** is not moving, why?
+- One **script** per **node**? How am I supposed to make a **Player** with only **one script**?
+- Why does **collisions** feels so counterintuitive?
+- My beloved **ScriptbleObjects**, I miss them so much
   ...
-- Thing in Unity were so simple, why should I switch?
+- Thing in **Unity** were so simple, why should I switch?
 
 ---
 
@@ -297,7 +275,18 @@ func _ready() -> void:
 
 ---
 
-// Slides about pausing the game
+## Now my game needs to be paused... but I see no Time.timeScale
+
+- You know that Godot has its internal pause state?
+
+```gdscript
+get_tree().paused = true
+```
+
+- Doing so will pause the entire scene tree, so all the update callbacks such as `_process()` and `_physics_process()` won't be called
+- If your want a specific node to keep working even while the game is paused, just set its **Process Mode** to **Always**
+
+![height:150px](images/process.png)
 
 ---
 
