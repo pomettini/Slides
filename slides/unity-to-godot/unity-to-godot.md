@@ -1,7 +1,8 @@
 ---
-title: Global Game Jam 2024 Postmortem
+title: Back to Unity island (si va a Godotpoli)
 marp: true
 theme: default
+class: invert
 style: |
   ul {
     padding: 0 1em;
@@ -112,7 +113,7 @@ _Surprised Pikachu face_
 
 - Yes _BUT_
 - In Unity, **a prefab is a container for Components** _(Transform, SpriteRender, ecc)_
-- In Godot, a **node is like a GameObject with one built-in role** _(Sprite2D, Camera2D, ecc)_
+- In Godot, a **node is like a GameObject with one built-in role** _(Sprite2D, Camera2D, Line2D, ecc)_
 
 ---
 
@@ -141,7 +142,7 @@ Every node should be a children of the base node
 
 ## I have made a Player script, now how do I move it?
 
-```gdscript
+```ruby
 extends CharacterBody2D
 
 @export var speed := 10.0
@@ -165,7 +166,7 @@ func _process(delta: float) -> void:
 
 _**CharacterBody2D** is a specialized class for physics bodies that are meant to be user-controlled. [...] They are mainly used to provide high-level API to move objects with wall and slope detection (`move_and_slide()` method)_
 
-```gdscript
+```ruby
 func _process(delta: float) -> void:
     velocity = _direction * speed * delta
     # Added move and slide here
@@ -183,7 +184,7 @@ func _process(delta: float) -> void:
 - Create a **Character2D node** and call it **Projectile**
 - Make sure to assign your **projectile node** to `player_projectile` in the **inspector**
 
-```gdscript
+```ruby
 @export var player_projectile: PackedScene
 
 func _process(delta: float) -> void:
@@ -220,7 +221,7 @@ func _process(delta: float) -> void:
 
 - No problem, here's how to do it:
 
-```gdscript
+```ruby
 func _ready() -> void:
     $Timer.timeout.connect(_on_timer_timeout)
 
@@ -238,7 +239,7 @@ func _on_timer_timeout():
 
 - You can make every **GDScript** function **asynchronous** just by adding `await` inside the function
 
-```gdscript
+```ruby
 @export var destroy_after := 1.0
 
 
@@ -279,8 +280,8 @@ func _ready() -> void:
 
 - You know that Godot has its internal pause state?
 
-```gdscript
-get_tree().paused = true
+```ruby
+get_tree().paused = true;
 ```
 
 - Doing so will pause the entire scene tree, so all the update callbacks such as `_process()` and `_physics_process()` won't be called
@@ -300,9 +301,9 @@ get_tree().paused = true
 
 - Now you can access it like this:
 
-```gdscript
-GameManager.score += 10
-GameManager.reset_score()
+```ruby
+GameManager.score += 10;
+GameManager.reset_score();
 ```
 
 ---
@@ -318,7 +319,7 @@ get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
 - This **unloads the current scene and loads a new one**, just like **Unity's** `LoadScene`
 - Heavy scene? Loading is chugging the game? No problem
 
-```gdscript
+```ruby
 const MAIN_MENU_SCENE := preload("res://scenes/MainMenu.tscn")
 
 get_tree().change_scene_to_packed(MAIN_MENU_SCENE)
@@ -333,6 +334,14 @@ get_tree().change_scene_to_packed(MAIN_MENU_SCENE)
 - I feel that too...
 - Luckily, Godot has its data container too: **resources**
 - Want to create your **custom resource**? Create a **script** and let it **inherit from resource**
+
+```ruby
+class_name IntVariable
+extends Resource
+
+var value: int
+```
+
 - Then you can create your custom made resource by right-clicking on the **FileSystem** dock and **Create New** > **Resource** > **YourCustomResource**
 
 ---
@@ -343,7 +352,7 @@ get_tree().change_scene_to_packed(MAIN_MENU_SCENE)
 - But what if I tell you that you can use **resources** to save data?
 - Let's make a **PlayerData** custom **resource**:
 
-```gdscript
+```ruby
 class_name PlayerData
 extends Resource
 
@@ -357,7 +366,7 @@ Continues in the next slide...
 
 ### Saving data example:
 
-```gdscript
+```ruby
 func save_player_data():
     var data = PlayerData.new()
     data.player_name = "Pomettini"
@@ -379,7 +388,7 @@ func save_player_data():
 
 ### Loading data example:
 
-```gdscript
+```ruby
 func load_player_data():
     var save_path = "user://player_data.res"
 
@@ -400,7 +409,7 @@ func load_player_data():
 
 ## Okay but my jam ends in 1h and I need a faster approach...
 
-```gdscript
+```ruby
 func save_data():
     var config = ConfigFile.new()
     config.set_value("player", "name", "Pomettini")
