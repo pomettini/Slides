@@ -114,7 +114,7 @@ _Surprised Pikachu face_
 - Yes _BUT_
 - In **Unity**, **a prefab is a container for Components** _(Transform, SpriteRenderer, etc)_
 - In **Godot**, a **node is like a GameObject with one built-in role** _(Sprite2D, Camera2D)_
-- Is everything clear so far?
+- Everything clear so far?
 
 ---
 
