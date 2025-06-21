@@ -77,10 +77,10 @@ Well, you gotta start somewhere...
 - **Nodes**? Oh, are those **GameObjects**?
 - Wtf why there are so many **nodes**?
 - One **script** per **node**? How am I supposed to make a **Player** with only **one script**?
-- Why does **collisions** feels so counterintuitive?
+- Why do **collisions** feels so counterintuitive?
 - My beloved **ScriptbleObjects**, I miss them so much
   ...
-- Thing in **Unity** were so simple, why should I switch?
+- Things in **Unity** were so simple, why should I switch?
 
 ---
 
@@ -112,8 +112,9 @@ _Surprised Pikachu face_
 ## Nodes? Oh, are those GameObjects?
 
 - Yes _BUT_
-- In Unity, **a prefab is a container for Components** _(Transform, SpriteRender, ecc)_
-- In Godot, a **node is like a GameObject with one built-in role** _(Sprite2D, Camera2D, Line2D, ecc)_
+- In **Unity**, **a prefab is a container for Components** _(Transform, SpriteRenderer, etc)_
+- In **Godot**, a **node is like a GameObject with one built-in role** _(Sprite2D, Camera2D)_
+- Is everything clear so far?
 
 ---
 
@@ -125,7 +126,7 @@ _Surprised Pikachu face_
   - **AnimatedSprite2D** is responsible for... well... **animating a sprite**
   - **Line2D** is responsible for **drawing a line** in the 2D view
   - And so on...
-- Don't you see the one you're looking for? **Make your own!**
+- Don’t see the one you need? **Make your own!**
 - Also, you can attach **one (ONE!) script** to each node to add behaviour
 
 ---
@@ -257,8 +258,8 @@ func _ready() -> void:
 
 - Like in **Unity**, **collision** happens when **two physics objects overlap** _(duh!)_
 - In **Godot** we have different **nodes**, each one for a different use case:
-  - **StaticBody2D** (objects that doesn't move: _walls, floors, etc_)
-  - **RigidBody2D** (objects that are affected by physics indirectly: _boxes, ecc_)
+  - **StaticBody2D** (objects that don't move: _walls, floors, etc_)
+  - **RigidBody2D** (objects that are affected by physics indirectly: _boxes, etc_)
   - **CharacterBody2D** (objects moved by the player or AI)
   - **Area2D** (objects that detects the presence of other objects but are not solid)
 - You should also add a **CollisionShape2D** as a child of the physics body and, from the **inspector**, **add a new shape** _(RectangleShape2D, CircleShape2D, etc)_
@@ -381,7 +382,7 @@ func save_player_data():
         print("Player data saved.")
 ```
 
-- Data will be saved at `OS.get_user_data_dir()` in **binary** format
+- Data will be saved at `OS.get_user_data_dir()` in a **custom binary** format
 - You can use **ResourceSaver** to save pretty much anything, <ins>**even scenes!**</ins>
 
 ---
@@ -424,14 +425,15 @@ func load_data():
         var score = config.get_value("player", "score", 0)
 ```
 
-- This works exactly like **Unity's PlayerPrefs** and works well for prototypes
+- This works exactly like **Unity's PlayerPrefs** but still **saves in a local file**
+- Works well for small games and prototypes
 
 ---
 
-## Btw coming from Unity the interface looks so caothic...
+## Btw coming from Unity the interface looks so chaotic...
 
 - I get that, here's some tweaks you can do:
-- Create an [editor profile](https://docs.godotengine.org/en/latest/tutorials/editor/managing_editor_features.html) (you can **hide stuff** you won't use, like XR stuff)
+- Create an [editor profile](https://docs.godotengine.org/en/latest/tutorials/editor/managing_editor_features.html) (you can **hide features** you won't use, like XR stuff)
   - You can even **hide all the 3D stuff** if you're making a **2D game**
 - From **Editor Settings** > **General** > **Inspector** > **Disable Folding** (check this to avoid sections to be collapsed in the inspector, you can find properties easily this way)
 - Install [PassiveStar's Godot Theme](https://github.com/passivestar/godot-minimal-theme) (trust me, it looks way better)
