@@ -278,13 +278,13 @@ func _ready() -> void:
 
 ## Now my game needs to be paused... but I see no Time.timeScale
 
-- You know that Godot has its internal pause state?
+- You know that **Godot** has its internal pause state?
 
 ```ruby
 get_tree().paused = true;
 ```
 
-- Doing so will pause the entire scene tree, so all the update callbacks such as `_process()` and `_physics_process()` won't be called
+- Doing so will **pause** the **entire scene tree**, so all the update callbacks such as `_process()` and `_physics_process()` won't be called
 - If your want a specific node to keep working even while the game is paused, just set its **Process Mode** to **Always**
 
 ![height:150px](images/process.png)
